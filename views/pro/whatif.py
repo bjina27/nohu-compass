@@ -35,12 +35,12 @@ with c1, st.container(border=True):
         market = f[1].selectbox("시장", list(d.MARKETS), format_func=d.MARKETS.get)
         run = st.form_submit_button("▶ 다시 계산", type="primary")
     ui.foot("연금 나이·퇴직급여·투자전략·시장만 바꾸면 본실험 1만 경로 결과를 바로 보여줍니다. "
-            "생활비·자녀 지원·가드레일을 바꾸면 엔진을 1,000경로로 실시간 계산합니다(10~20초).")
+            "생활비·자녀 지원·가드레일을 바꾸면 엔진을 1,000경로로 실시간 계산합니다(약 1분, 같은 조건을 다시 누르면 바로 표시).")
 
 cond = dict(a=a_age, s=s_age, method=method, strategy=strat, living=round(living * 10_000), child=child, guard=guard)
 if run or "whatif_last" not in ss:
     if el.needs_quick(cond):
-        with st.spinner("엔진 계산 중… 1,000경로 × (바꾼 조건 + 추천안)"):
+        with st.spinner("엔진 계산 중… 1,000경로 × (바꾼 조건 + 추천안), 약 1분 걸립니다"):
             ss.whatif_last = (cond, market, *el.compute(cond, market))
     else:
         ss.whatif_last = (cond, market, *el.compute(cond, market))
