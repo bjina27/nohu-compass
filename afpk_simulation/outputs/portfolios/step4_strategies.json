@@ -1,0 +1,307 @@
+{
+  "as_of": "2026-10-31",
+  "created_by": "investment/asset_allocation.py",
+  "asset_order": [
+    "cash",
+    "bond_kr",
+    "equity_kr"
+  ],
+  "initial_financial_assets": 70130000,
+  "emergency_fund_basis": {
+    "monthly_min_living_2026": 2166000,
+    "monthly_mortgage": 988029,
+    "mortgage_end_year": 2037,
+    "inflation_rate": 0.022,
+    "monthly_essential_2026": 3154029,
+    "months": [
+      3,
+      6
+    ],
+    "schedule_file": "outputs/portfolios/emergency_fund_schedule.csv"
+  },
+  "allocation_rule": {
+    "summary": "매년 초 비상자금을 그해 필수지출로 다시 계산해 예적금에 두고, 남은 금액을 equity_share_of_remainder 비율로 주식:채권에 배분",
+    "monthly_essential(year)": "최소생활비 2,166,000원 × (1 + 2.2%)^(year − 2026) + 주담대 원리금 988,029원(2037년까지, 이후 0)",
+    "cash_target(year)": "monthly_essential(year) × emergency_months (3 또는 6)",
+    "weights(year)": "cash = min(1, cash_target / 연초 금융자산); equity = (1 − cash) × equity_share_of_remainder; bond = 나머지",
+    "insufficient_assets": "연초 금융자산 ≤ cash_target이면 전부 예적금. 부족분을 지출로 처리하지 않음",
+    "function": "investment.asset_allocation.target_weights(year, financial_assets, emergency_months, equity_share_of_remainder)",
+    "weights_field": "strategies[].weights는 2026년 초(금융자산 70,130,000원) 기준 초기 비중. 이후 연도는 위 규칙으로 매년 다시 계산"
+  },
+  "market_scenarios": {
+    "base_846_aftertax": {
+      "label": "기준·세후 (주식 세전 8.46% → 세후 8.30%)",
+      "tax": "after_tax",
+      "file": "data/market/market_assumptions_20261031_pre2025_aftertax.json"
+    },
+    "down_600_aftertax": {
+      "label": "하향·세후 (주식 세전 6.00% → 세후 5.84%)",
+      "tax": "after_tax",
+      "file": "data/market/market_assumptions_20261031_pre2025_eq600_aftertax.json"
+    },
+    "base_846": {
+      "label": "기준·세전 (주식 8.46%) — 세금 민감도 비교용",
+      "tax": "pre_tax",
+      "file": "data/market/market_assumptions_20261031_pre2025.json"
+    },
+    "down_600": {
+      "label": "하향·세전 (주식 6.00%) — 세금 민감도 비교용",
+      "tax": "pre_tax",
+      "file": "data/market/market_assumptions_20261031_pre2025_eq600.json"
+    }
+  },
+  "default_market_scenario": "base_846_aftertax",
+  "risk_inputs_status": {
+    "risk_tolerance": {
+      "value": {
+        "A씨": 23,
+        "배우자": 26
+      },
+      "status": "모의상담 설정값을 코드에 직접 입력. 최종 추천 시 확정된 G&L 평가 결과와 연결 필요"
+    },
+    "risk_capacity": {
+      "cfa_2026": "보통 — 비상시 외부 소득·자산 '있으나 불충분'(페르소나 가정, 실제 조사로 검증된 값 아님). C48 공백기 2036~2039 포함 2026~2064 보통",
+      "alm_floor_2026_min_and_adequate": 0,
+      "stress_reference_growth_share_2026": 1.0,
+      "status": "risk_capacity 모듈 실행값(2026-11-16 재계산: scripts/risk_profile_c48.py(risk_profile 패키지 = 팀원 모듈 원본) — 최종안 C48(A씨 70·배우자 69) 기본 경로, 퇴직급여 일시금, 투자 미연결, 세후 시장가정; CFA 유동성=계획 장부, ALM 바닥=최소 장부(양가 어머니 지원만)). CFA 보통 확정: 외부 재원 '충분함' 미확인을 보수적 페르소나 가정으로 둠(팀 결정 2026-11-16)"
+    },
+    "risk_need": {
+      "label": "낮음",
+      "required_return_plan": 0.0,
+      "required_growth_share": 0.0,
+      "note": "risk_need.assess_risk_need 실행값(현행 엔진, C48). 계획지출 전체·최소생활비 기준 모두 요구수익률 0%(투자수익이 없어도 금융자산이 바닥나지 않음). 세후 시장가정(예적금 2.81%·채권 3.23%·주식 8.30%). 기존 2.58%는 11-15 구버전 기록으로 재현 불가하여 제외(팀원 동의). 비상자금 3·6개월(현금 13.5%·27%) 모두 필요 성장자산 0%(방어자산·현금만으로 충분)",
+      "status": "risk_need 모듈 실행값(2026-11-16 재계산: scripts/risk_profile_c48.py(risk_profile 패키지 = 팀원 모듈 원본) — 최종안 C48(A씨 70·배우자 69) 기본 경로, 퇴직급여 일시금, 투자 미연결, 세후 시장가정; CFA 유동성=계획 장부, ALM 바닥=최소 장부(양가 어머니 지원만))"
+    }
+  },
+  "screening": "컷오프 없음. 기본 제약(비상자금 확보·고객 거부조건)만 확인 → 22개 전부 STEP 5 대상",
+  "monte_carlo_contract": {
+    "weights_unit": "소수, 합 1 (전체 금융자산 기준)",
+    "portfolio_return": "연 포트폴리오 단순수익률 = sum_i w_i(year) × R_i, R_i = exp(x_i) − 1, x ~ MVN(annual_log_means, annual_log_cov)",
+    "rebalancing": "매년 초 allocation_rule로 그해 목표비중 w(year)를 다시 계산해 리밸런싱 (고정 비율 아님)",
+    "emergency_fund": "비상자금은 예적금 비중에 포함된 금액(금융자산 배분). 현금흐름·생활비 바닥 등에서 다시 차감하지 않음",
+    "fees_taxes": "tax=after_tax 시나리오는 기대수익률에 이자·배당소득세 15.4%가 이미 반영됨(시장 JSON의 tax_adjustment) → portfolio_engine에서 같은 세금을 다시 빼지 말 것. tax=pre_tax는 세금 영향 비교용. 운용보수는 미반영(연 0.15% 수준)",
+    "same_paths": "공정 비교를 위해 22개 후보는 같은 시나리오 안에서 동일한 난수 경로(같은 seed)를 사용"
+  },
+  "strategies": [
+    {
+      "id": "A00",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.0,
+      "weights": [
+        0.1349221018,
+        0.8650778982,
+        0.0
+      ]
+    },
+    {
+      "id": "A10",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.1,
+      "weights": [
+        0.1349221018,
+        0.7785701084,
+        0.0865077898
+      ]
+    },
+    {
+      "id": "A20",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.2,
+      "weights": [
+        0.1349221018,
+        0.6920623186,
+        0.1730155796
+      ]
+    },
+    {
+      "id": "A30",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.3,
+      "weights": [
+        0.1349221018,
+        0.6055545287,
+        0.2595233695
+      ]
+    },
+    {
+      "id": "A40",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.4,
+      "weights": [
+        0.1349221018,
+        0.5190467389,
+        0.3460311593
+      ]
+    },
+    {
+      "id": "A50",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.5,
+      "weights": [
+        0.1349221018,
+        0.4325389491,
+        0.4325389491
+      ]
+    },
+    {
+      "id": "A60",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.6,
+      "weights": [
+        0.1349221018,
+        0.3460311593,
+        0.5190467389
+      ]
+    },
+    {
+      "id": "A70",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.7,
+      "weights": [
+        0.1349221018,
+        0.2595233695,
+        0.6055545287
+      ]
+    },
+    {
+      "id": "A80",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.8,
+      "weights": [
+        0.1349221018,
+        0.1730155796,
+        0.6920623186
+      ]
+    },
+    {
+      "id": "A90",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 0.9,
+      "weights": [
+        0.1349221018,
+        0.0865077898,
+        0.7785701084
+      ]
+    },
+    {
+      "id": "A100",
+      "emergency_months": 3,
+      "equity_share_of_remainder": 1.0,
+      "weights": [
+        0.1349221018,
+        0.0,
+        0.8650778982
+      ]
+    },
+    {
+      "id": "B00",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.0,
+      "weights": [
+        0.2698442036,
+        0.7301557964,
+        0.0
+      ]
+    },
+    {
+      "id": "B10",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.1,
+      "weights": [
+        0.2698442036,
+        0.6571402167,
+        0.0730155796
+      ]
+    },
+    {
+      "id": "B20",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.2,
+      "weights": [
+        0.2698442036,
+        0.5841246371,
+        0.1460311593
+      ]
+    },
+    {
+      "id": "B30",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.3,
+      "weights": [
+        0.2698442036,
+        0.5111090575,
+        0.2190467389
+      ]
+    },
+    {
+      "id": "B40",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.4,
+      "weights": [
+        0.2698442036,
+        0.4380934778,
+        0.2920623186
+      ]
+    },
+    {
+      "id": "B50",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.5,
+      "weights": [
+        0.2698442036,
+        0.3650778982,
+        0.3650778982
+      ]
+    },
+    {
+      "id": "B60",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.6,
+      "weights": [
+        0.2698442036,
+        0.2920623186,
+        0.4380934778
+      ]
+    },
+    {
+      "id": "B70",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.7,
+      "weights": [
+        0.2698442036,
+        0.2190467389,
+        0.5111090575
+      ]
+    },
+    {
+      "id": "B80",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.8,
+      "weights": [
+        0.2698442036,
+        0.1460311593,
+        0.5841246371
+      ]
+    },
+    {
+      "id": "B90",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 0.9,
+      "weights": [
+        0.2698442036,
+        0.0730155796,
+        0.6571402167
+      ]
+    },
+    {
+      "id": "B100",
+      "emergency_months": 6,
+      "equity_share_of_remainder": 1.0,
+      "weights": [
+        0.2698442036,
+        0.0,
+        0.7301557964
+      ]
+    }
+  ]
+}

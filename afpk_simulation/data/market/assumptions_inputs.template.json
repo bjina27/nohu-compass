@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-31",
+  "currency": "KRW",
+  "basis": "nominal",
+  "returns_before_fees_and_taxes": true,
+  "asset_order": ["cash", "bond_kr", "equity_kr"],
+  "annual_expected_simple_returns": {
+    "cash": null,
+    "bond_kr": null,
+    "equity_kr": null
+  },
+  "expected_return_sources": {
+    "cash": "미확정: 같은 기준일 ECOS 단기금리와 수익률 환산법 기재",
+    "bond_kr": "미확정: 벤치마크 듀레이션에 대응하는 국채 YTM과 채권 가정 기재",
+    "equity_kr": "미확정: 원화 기준 주식위험프리미엄 방법/출처 및 불확실성 기재"
+  },
+  "data_provenance": {
+    "cash": {
+      "series_type": "rate_proxy",
+      "series_name": "미확정: 예, CD 91일 월별 금리",
+      "source_url": "https://ecos.bok.or.kr/",
+      "unit": "annual_percent_quoted_then_converted_to_monthly_decimal"
+    },
+    "bond_kr": {
+      "series_type": "total_return",
+      "series_name": "미확정: KRX 국채 총수익지수(정확한 지수명 필요)",
+      "source_url": "https://data.krx.co.kr/",
+      "unit": "index_level_to_monthly_decimal_return"
+    },
+    "equity_kr": {
+      "series_type": "total_return",
+      "series_name": "미확정: KOSPI 200 TR(정확한 지수명 필요)",
+      "source_url": "https://data.krx.co.kr/",
+      "unit": "index_level_to_monthly_decimal_return"
+    }
+  },
+  "notes": [
+    "이 파일의 null 필드는 실제 데이터와 공식 출처 검증 전까지 채우지 말 것",
+    "2026-10-31은 2026-11-13 현재 마지막 완료 월을 예시한 기준일로, 추출 시점에 맞게 조정",
+    "Damodaran 달러 기준 ERP를 원화 국채 금리에 무설명으로 더하지 말 것"
+  ]
+}

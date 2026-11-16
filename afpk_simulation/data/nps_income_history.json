@@ -1,0 +1,311 @@
+{
+  "a": [
+    {
+      "year": 1993,
+      "monthly_income": 548000,
+      "months": 12
+    },
+    {
+      "year": 1994,
+      "monthly_income": 765000,
+      "months": 12
+    },
+    {
+      "year": 1995,
+      "monthly_income": 892000,
+      "months": 12
+    },
+    {
+      "year": 1996,
+      "monthly_income": 978000,
+      "months": 12
+    },
+    {
+      "year": 1997,
+      "monthly_income": 1093000,
+      "months": 12
+    },
+    {
+      "year": 1998,
+      "monthly_income": 1072000,
+      "months": 12
+    },
+    {
+      "year": 2007,
+      "monthly_income": 1604000,
+      "months": 12
+    },
+    {
+      "year": 2008,
+      "monthly_income": 1362000,
+      "months": 12
+    },
+    {
+      "year": 2009,
+      "monthly_income": 1267000,
+      "months": 12
+    },
+    {
+      "year": 2010,
+      "monthly_income": 1309000,
+      "months": 12
+    },
+    {
+      "year": 2011,
+      "monthly_income": 1386000,
+      "months": 12
+    },
+    {
+      "year": 2012,
+      "monthly_income": 1479000,
+      "months": 12
+    },
+    {
+      "year": 2013,
+      "monthly_income": 1561000,
+      "months": 12
+    },
+    {
+      "year": 2014,
+      "monthly_income": 1530000,
+      "months": 12
+    },
+    {
+      "year": 2015,
+      "monthly_income": 1558000,
+      "months": 12
+    },
+    {
+      "year": 2016,
+      "monthly_income": 1668000,
+      "months": 12
+    },
+    {
+      "year": 2017,
+      "monthly_income": 1752000,
+      "months": 12
+    },
+    {
+      "year": 2018,
+      "monthly_income": 1867000,
+      "months": 12
+    },
+    {
+      "year": 2019,
+      "monthly_income": 1976000,
+      "months": 12
+    },
+    {
+      "year": 2020,
+      "monthly_income": 2000000,
+      "months": 12
+    },
+    {
+      "year": 2021,
+      "monthly_income": 2050000,
+      "months": 12
+    },
+    {
+      "year": 2022,
+      "monthly_income": 2200000,
+      "months": 12
+    },
+    {
+      "year": 2023,
+      "monthly_income": 2361000,
+      "months": 12
+    },
+    {
+      "year": 2024,
+      "monthly_income": 2300000,
+      "months": 12
+    },
+    {
+      "year": 2025,
+      "monthly_income": 2420000,
+      "months": 12
+    },
+    {
+      "year": 2026,
+      "monthly_income": 2310000,
+      "months": 12
+    },
+    {
+      "year": 2027,
+      "monthly_income": 2310000,
+      "months": 12
+    },
+    {
+      "year": 2028,
+      "monthly_income": 2310000,
+      "months": 12
+    }
+  ],
+  "spouse": [
+    {
+      "year": 1994,
+      "monthly_income": 936000,
+      "months": 12
+    },
+    {
+      "year": 1995,
+      "monthly_income": 1036000,
+      "months": 12
+    },
+    {
+      "year": 1996,
+      "monthly_income": 1143000,
+      "months": 12
+    },
+    {
+      "year": 1997,
+      "monthly_income": 1583000,
+      "months": 12
+    },
+    {
+      "year": 1998,
+      "monthly_income": 1553000,
+      "months": 12
+    },
+    {
+      "year": 1999,
+      "monthly_income": 1546000,
+      "months": 12
+    },
+    {
+      "year": 2000,
+      "monthly_income": 1665000,
+      "months": 12
+    },
+    {
+      "year": 2001,
+      "monthly_income": 1741000,
+      "months": 12
+    },
+    {
+      "year": 2002,
+      "monthly_income": 2235000,
+      "months": 12
+    },
+    {
+      "year": 2003,
+      "monthly_income": 2409000,
+      "months": 12
+    },
+    {
+      "year": 2004,
+      "monthly_income": 2589000,
+      "months": 12
+    },
+    {
+      "year": 2005,
+      "monthly_income": 2750000,
+      "months": 12
+    },
+    {
+      "year": 2006,
+      "monthly_income": 2911000,
+      "months": 12
+    },
+    {
+      "year": 2007,
+      "monthly_income": 3201000,
+      "months": 12
+    },
+    {
+      "year": 2008,
+      "monthly_income": 2800000,
+      "months": 12
+    },
+    {
+      "year": 2009,
+      "monthly_income": 2837000,
+      "months": 12
+    },
+    {
+      "year": 2010,
+      "monthly_income": 2876000,
+      "months": 12
+    },
+    {
+      "year": 2011,
+      "monthly_income": 2922000,
+      "months": 12
+    },
+    {
+      "year": 2012,
+      "monthly_income": 3010000,
+      "months": 12
+    },
+    {
+      "year": 2013,
+      "monthly_income": 3106000,
+      "months": 12
+    },
+    {
+      "year": 2014,
+      "monthly_income": 3154000,
+      "months": 12
+    },
+    {
+      "year": 2015,
+      "monthly_income": 3300000,
+      "months": 12
+    },
+    {
+      "year": 2016,
+      "monthly_income": 3470000,
+      "months": 12
+    },
+    {
+      "year": 2017,
+      "monthly_income": 3247000,
+      "months": 12
+    },
+    {
+      "year": 2018,
+      "monthly_income": 3400000,
+      "months": 12
+    },
+    {
+      "year": 2019,
+      "monthly_income": 3557000,
+      "months": 12
+    },
+    {
+      "year": 2020,
+      "monthly_income": 3600000,
+      "months": 12
+    },
+    {
+      "year": 2021,
+      "monthly_income": 3768000,
+      "months": 12
+    },
+    {
+      "year": 2022,
+      "monthly_income": 3625000,
+      "months": 12
+    },
+    {
+      "year": 2023,
+      "monthly_income": 3658000,
+      "months": 12
+    },
+    {
+      "year": 2024,
+      "monthly_income": 3855000,
+      "months": 12
+    },
+    {
+      "year": 2025,
+      "monthly_income": 4078000,
+      "months": 12
+    },
+    {
+      "year": 2026,
+      "monthly_income": 3940000,
+      "months": 12
+    }
+  ]
+}
