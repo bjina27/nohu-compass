@@ -73,10 +73,7 @@ def _switch():
 
 
 ss._mode_sel = ss.mode
-l, r = st.columns([3, 2], vertical_alignment="center")
-l.markdown('<span style="font-size:13px;color:#6B7684">👤 A씨 가구 (페르소나) · 웹 시안, 숫자는 실제 1만 경로 결과</span>', unsafe_allow_html=True)
-with r:
-    st.segmented_control("화면", list(MODES), key="_mode_sel", on_change=_switch, label_visibility="collapsed", width="content")
-    st.markdown("<style>.st-key-_mode_sel{display:flex;justify-content:flex-end}</style>", unsafe_allow_html=True)
+# 화면 전환 버튼: 본문 왼쪽 위
+st.segmented_control("화면", list(MODES), key="_mode_sel", on_change=_switch, label_visibility="collapsed", width="content")
 
 nav.run()
