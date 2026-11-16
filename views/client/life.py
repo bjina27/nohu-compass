@@ -39,10 +39,11 @@ with st.container(border=True):
     base = go.Scatter(x=ys, y=p50, fill="tozeroy", line=dict(color=BLUE, width=3), fillcolor=rgba(BLUE, .12), hovertemplate="%{x}년 %{y:.2f}억<extra></extra>")
     dot = lambda i: go.Scatter(x=[ys[i]], y=[p50[i]], mode="markers+text", text=[f"{p50[i]:.1f}억"], textposition="top center",
                                textfont=dict(size=15, color=G900), marker=dict(size=18, color=ORANGE, line=dict(color="white", width=3)), hoverinfo="skip")
-    ann = lambda i: [dict(text=lab[i], x=0, y=1.13, xref="paper", yref="paper", showarrow=False, xanchor="left", font=dict(size=15, color=G900))]
+    gap_lab = dict(text="연금 기다리는 4년", x=2037.5, y=0.99, xref="x", yref="paper", yanchor="top", bgcolor="rgba(255,255,255,0.85)", showarrow=False, font=dict(size=12, color="#B86E00"))
+    ann = lambda i: [dict(text=lab[i], x=0, y=1.13, xref="paper", yref="paper", showarrow=False, xanchor="left", font=dict(size=15, color=G900)), gap_lab]
     fig = go.Figure(data=[base, dot(0)], frames=[go.Frame(data=[base, dot(i)], layout=go.Layout(annotations=ann(i)), name=str(y)) for i, y in enumerate(ys)])
     ui.style(fig, 400, legend=False, ysuf="억")
-    ui.gap(fig, label=False)
+    ui.gap(fig, label=False, tint=True)
     fig.update_layout(annotations=ann(0), margin=dict(t=56, b=70),
                       updatemenus=[dict(type="buttons", direction="left", x=0, y=-0.13, xanchor="left", yanchor="top", showactive=False,
                                         bgcolor=BLUE, font=dict(color="white", size=14), bordercolor=BLUE,
@@ -53,6 +54,7 @@ with st.container(border=True):
                                                 args=[[str(y)], dict(frame=dict(duration=0, redraw=True), mode="immediate")]) for y in ys])])
     fig.update_yaxes(range=[0, max(p50) * 1.25])
     ui.show(fig)
+    ui.foot("주황 점선 사이 = 연금 기다리는 4년(2036~2039년). 월급이 끊기고 A씨 연금은 아직이라 모아둔 돈을 꺼내 쓰는 시기예요.")
 
 with st.container(border=True):
     y = st.select_slider("자세히 볼 해", options=ys, value=st.session_state.get("life_y", 2036), key="life_y")

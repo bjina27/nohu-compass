@@ -13,7 +13,7 @@ c1, c2 = st.columns([2, 1], gap="medium")
 with c1, st.container(border=True):
     ui.title("100세까지 금융자산 범위", "억 원 · 2026년 가치")
     ui.show(charts.fan())
-    ui.foot("진한 띠 25~75% · 옅은 띠 5~95% · 음영 = 연금 공백기")
+    ui.foot("진한 띠 25~75% · 옅은 띠 5~95% · 주황 점선 사이 = 연금 공백기")
 with c2, st.container(border=True):
     ui.title("추천 재무설계안")
     ui.timeline([("2033", "배우자 은퇴 · 퇴직급여 일시금"), ("2035", "A씨 은퇴 · 퇴직급여 일시금"), ("2036", "배우자 국민연금 (69세)"),

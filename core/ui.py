@@ -198,9 +198,20 @@ def style(fig, h=320, legend=True, ysuf=None, xgrid=False):
     return fig
 
 
-def gap(fig, label=True, half=0.5):
+def gap(fig, label=True, half=0.5, tint=False):
+    """연금 공백기(2036~2039) 띠. tint=True: 면적 그래프 위에 연한 주황을 얹어 회색으로 탁해지지 않게."""
     kw = dict(annotation_text="연금 공백기", annotation_position="top left", annotation_font=dict(size=11.5, color=G600)) if label else {}
-    fig.add_vrect(x0=2036 - half, x1=2039 + half, fillcolor=GAPC, line_width=0, layer="below", **kw)
+    if tint:
+        # 면을 칠하면 파란 면적과 섞여 탁해지므로: 양 끝 점선 + 바닥 막대 + 라벨
+        x0, x1 = 2036 - half, 2039 + half
+        for x in (x0, x1):
+            fig.add_vline(x=x, line=dict(color=ORANGE, width=1.5, dash="dot"), layer="above")
+        fig.add_shape(type="rect", x0=x0, x1=x1, xref="x", yref="paper", y0=0, y1=0.035, fillcolor=ORANGE, line_width=0, layer="above")
+        if label:
+            fig.add_annotation(x=(x0 + x1) / 2, y=0.99, xref="x", yref="paper", yanchor="top", showarrow=False, bgcolor="rgba(255,255,255,0.85)",
+                               text="연금 공백기", font=dict(size=12, color="#B86E00"))
+    else:
+        fig.add_vrect(x0=2036 - half, x1=2039 + half, fillcolor=GAPC, line_width=0, layer="below", **kw)
     return fig
 
 

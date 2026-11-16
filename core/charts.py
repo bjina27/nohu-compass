@@ -21,7 +21,7 @@ def fan(h=340):
     fig.add_trace(go.Scatter(x=x, y=f["p50"], line=dict(color=BLUE, width=3), name="중앙값", hovertemplate="중앙값: %{y:.2f}억<extra></extra>"))
     style(fig, h, ysuf="억")
     fig.update_layout(hovermode="x unified")
-    return gap(fig)
+    return gap(fig, tint=True)
 
 
 def donut(k, h=190):
