@@ -10,12 +10,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE, DOWN = "base_846_aftertax", "down_600_aftertax"
-MARKETS = {BASE: "기준 시장 (주식 8.46%)", DOWN: "하향 시장 (주식 6.00%)"}
+MARKETS = {BASE: "기준 시장 (주식 세전 8.46%·세후 8.30%)", DOWN: "하향 시장 (주식 세전 6.00%·세후 5.84%)"}
 METHODS = {"lump_sum": "퇴직급여 일시금", "annuity": "퇴직급여 IRP 연금"}
 GAP = (2036, 2039)
 MOCK = {"a": 23, "s": 26}                      # G&L 페르소나 모의응답
 WEIGHTS = {"B00": [27, 73, 0], "B40": [27, 43.8, 29.2]}  # 예적금/채권/주식 %
-WON = {"B00": [1893, 5120, 0], "B40": [1893, 3072, 2048]}  # 초기 7,013만 원 배분
+WON = {"B00": [1892, 5121, 0], "B40": [1892, 3073, 2048]}  # 초기 7,013만 원 배분
 OUTSIDE = {"none": "없음", "some": "있으나 불충분 (페르소나 가정)", "sufficient": "충분함", "unknown": "미확인"}
 STRESS_NAMES = {"S0": "충격 없음", "S1": "은퇴 직후 폭락", "S2": "5년 고물가", "S3b": "가족 사건 최악", "S4b": "가족 사건 + 폭락"}
 GUARD_NAMES = {"none": "없음", "bridge": "① 공백기 준비금", "living": "② 생활비 가드레일", "both": "①+②"}
